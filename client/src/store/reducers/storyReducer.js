@@ -76,7 +76,10 @@ export default function (state = initialState, action) {
     case SET_STORY:
       return {
         ...state,
-        story: action.payload,
+        story: {
+          ...action.payload,
+          content: JSON.parse(action.payload.content),
+        },
       };
     case CLEAR_STORY:
       return {

@@ -27,21 +27,15 @@ const Header = (props) => {
     setAnchorEl(event.currentTarget);
   };
 
-  // useEffect(()=>{
-  //   const currentpath = history.location.pathname;
-  //   if(currentpath === '/profile')
-  //     setPage(0)
-  //   else if(currentpath === '/subscription')
-  //     setPage(1)
-  // },[history])
-
   return (
     <div className="main-header">
       <Link to="/">
-        <Logo light={true} />
+        <div className="header-logo">
+          <Logo />
+        </div>
       </Link>
       <div className="main-navbar">
-        <Link to="/profile">
+        <Link to="#">
           <div className="navbar-item">{props.user.fname}</div>
         </Link>
         <div>

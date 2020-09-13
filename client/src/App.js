@@ -9,6 +9,7 @@ import Login from "./components/login";
 import Register from "./components/register";
 import Landing from "./components";
 import Story from "./components/story";
+import Writer from "./components/writer";
 
 import { autologin } from "./store/actions/authActions";
 import PrivateRoute from "./utils/privateRoute";
@@ -59,7 +60,8 @@ function App() {
             <PublicRoute path="/login" component={Login} />
             <PublicRoute path="/register" component={Register} />
             <PrivateRoute exact path="/" component={Landing} />
-            <PrivateRoute exact path="/story/:storyId" component={Story} />
+            <PrivateRoute exact path="/story/read/:storyId" component={Story} />
+            <PrivateRoute path="/story/write" component={Writer} />
           </Switch>
         </BrowserRouter>
       </Provider>

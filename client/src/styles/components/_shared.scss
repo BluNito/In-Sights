@@ -1,6 +1,6 @@
 .splash-screen {
   display: flex;
-  height: 100vh;
+  height: calc(100vh - 60px);
   justify-content: center;
   align-items: center;
 }
@@ -25,6 +25,9 @@
 
 .alert-width-controller {
   display: flex;
+}
+.alert-extra-padding {
+  padding: 0 10px;
 }
 
 .centered-alert {
@@ -68,11 +71,12 @@
   }
 }
 
-.story-paper {
-  padding: 10px;
+.custom-divider {
+  margin: 20px 0;
 }
-.story-author {
-  padding: 10px;
-  text-align: right;
-  font-style: italic;
+
+.custom-footer {
+  margin-top: 30px;
+  height: 250px;
+  background-color :$main-color;
 }

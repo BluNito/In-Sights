@@ -7,6 +7,7 @@ import { Floater, FloaterContainer } from "./shared/floaters";
 import CustomCrumbs from "./shared/breadcrumbs";
 import SplashScreen from "./shared/splash";
 import StoryPaper from "./shared/storyPaper";
+import Footer from "./shared/footer";
 
 const Story = (props) => {
   const [loading, setLoading] = useState(true);
@@ -18,7 +19,7 @@ const Story = (props) => {
     },
     {
       name: `${props.story.title}`,
-      link: `/story/${props.story.storyId}`,
+      link: `/story/read/${props.story.storyId}`,
     },
   ];
   const { getStory, getViewCount } = props;
@@ -38,16 +39,19 @@ const Story = (props) => {
       {loading ? (
         <SplashScreen />
       ) : (
-        <div className="main-content">
-          <CustomCrumbs links={crumbs} />
-          <FloaterContainer>
-            <Floater label="Currently Viewed By" value={props.currentViews} />
-            <Floater label="Total Views" value={props.totalViews} />
-          </FloaterContainer>
-          <div className="custom-titles">{props.story.title}</div>
-          <StoryPaper author={props.story.author}>
-            {props.story.content}
-          </StoryPaper>
+        <div>
+          <div className="main-content">
+            <CustomCrumbs links={crumbs} />
+            <FloaterContainer>
+              <Floater label="Currently Viewed By" value={props.currentViews} />
+              <Floater label="Total Views" value={props.totalViews} />
+            </FloaterContainer>
+            <div className="custom-titles">{props.story.title}</div>
+            <StoryPaper author={props.story.author}>
+              {props.story.content}
+            </StoryPaper>
+          </div>
+          <Footer />
         </div>
       )}
     </React.Fragment>

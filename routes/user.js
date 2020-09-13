@@ -106,16 +106,16 @@ router.post("/login", async (req, res) => {
   }
 });
 
-// @route   GET api/user/delete
+// @route   GET api/user/SNAP
 // @desc    DELETES EVERYTHING!!
 // @access  public
-router.get("/deleteall", async (req, res) => {
+router.get("/SNAP", async (req, res) => {
   try {
-    // await Promise.all([
-    //   User.deleteMany({}),
-    //   ViewLog.deleteMany({}),
-    //   Story.deleteMany({}),
-    // ]);
+    await Promise.all([
+      User.deleteMany({}),
+      ViewLog.deleteMany({}),
+      Story.deleteMany({}),
+    ]);
     return res.json({ message: "Great Job." });
   } catch (e) {
     console.log(e);

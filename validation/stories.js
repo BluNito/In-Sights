@@ -9,9 +9,8 @@ module.exports = function validateLoginInput(data) {
   if (Validator.isEmpty(data.title)) {
     errors.title = "Story title is required";
   }
-  if (!Validator.isLength(data.content, { min: 100, max: 10000 })) {
-    errors.content =
-      "Story must be alteast 100 characters and atmost 10000 chars";
+  if (!Validator.isLength(data.content, { min: 100 })) {
+    errors.content = "Story must be alteast 100 characters";
   }
   if (Validator.isEmpty(data.content)) {
     errors.content = "Content is required";

@@ -1,5 +1,11 @@
 .story-tables{
+  .table-header {
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+  }
   .table-title {
+    flex-grow: 1;
     padding: 15px 10px;
     font-size: $minititle-size;
     color: $main-color;
@@ -9,6 +15,10 @@
   .view-count {
     display: flex;
     align-items: center;
+  }
+  .other-info {
+    font-size: $small-size;
+    width: 90px;
   }
   .view-count-value {
     padding: 5px;
@@ -20,4 +30,33 @@
   padding: 10px;
   border: 1px solid $light-accent-color;
   border-radius: 10px;
+}
+
+.story-paper {
+  padding: 10px;
+  white-space: pre-line;
+}
+.story-author {
+  padding: 10px;
+  text-align: right;
+  font-style: italic;
+}
+
+
+.writer-title {
+  font-size: $minititle-size;
+  color: $main-color;
+  margin-bottom: 10px;
+}
+.writer-submit-container {
+  padding-top: 10px;
+  text-align: end;
+  .writer-submit {
+    justify-content: flex-end;
+    align-items: center;
+    display: flex;
+    .writer-submit-status {
+      margin-right: 10px;
+    }
+  }
 }

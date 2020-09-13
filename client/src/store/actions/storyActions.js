@@ -12,6 +12,7 @@ import {
   SET_COLLECTION_PAGE,
 } from "./types";
 import { logout } from "./authActions";
+import { storyValdiation } from "../../utils/validation";
 
 export const getStories = (page) => async (dispatch) => {
   try {
@@ -105,7 +106,6 @@ export const clearStory = () => {
 };
 
 export const getViewCount = (storyId) => async (dispatch) => {
-  console.log("Getting view count");
   try {
     const res = await axios.get("/api/stories/viewlog", {
       params: {
@@ -126,5 +126,23 @@ export const getViewCount = (storyId) => async (dispatch) => {
         totalViews: 0,
       },
     });
+  }
+};
+
+export const submitStory = (title, content) => async (dispatch) => {
+  const errors = storyValdiation(title, content);
+  if (errors) return errors;
+  else {
+    try {
+      const jsonContent = JSON.stringify(content);
+      const res = await axios.post("/api/stories/create", {
+        title: title,
+        content: jsonContent,
+      });
+      if (res.status === 203) dispatch(logout());
+      return res.data;
+    } catch (e) {
+      return e.response.data;
+    }
   }
 };

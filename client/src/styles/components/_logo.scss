@@ -1,11 +1,19 @@
 .main-logo {
-  font-size: $logo-size;
-  color: $main-color;
-  font-style: italic;
+  font-size: $subtitle-size;
+  display: flex;
 }
-
+.logo-1 {
+  padding: 0 2px;
+  color: lighten($accent-color, 40%)
+}
+.logo-2{
+  color: lighten($accent-color, 40%)
+}
+.logo-3{
+  padding: 0 2px;
+  color: $accent-color;
+  font-weight: bold;
+}
 .header-logo {
-  font-size: $logo-size;
-  color: white;
-  font-style: italic;
+  margin-left: 10px;
 }

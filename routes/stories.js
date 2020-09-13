@@ -22,7 +22,7 @@ router.post("/create", auth.isUser, async (req, res) => {
     try {
       const story = await Story.findOne({ title: req.body.title });
       if (story) {
-        return res.status(400).json({ title: "Title already taken" });
+        return res.status(400).json({ error: "Title already taken" });
       } else {
         const newStory = new Story({
           title: req.body.title,
@@ -32,7 +32,7 @@ router.post("/create", auth.isUser, async (req, res) => {
           totalView: [],
         });
         newStory.save().then((_) => {
-          res.json({ message: "Added successfully" });
+          res.json({ success: "Story shared successfully" });
         });
       }
     } catch (e) {
@@ -53,7 +53,7 @@ router.get("/collection", auth.isUser, async (req, res) => {
       Story.find(
         {},
         { content: 0 },
-        { skip: (page - 1) * limit, limit: limit }
+        { sort: { _id: -1 }, skip: (page - 1) * limit, limit: limit }
       ),
       Story.estimatedDocumentCount(),
     ]);
@@ -83,7 +83,7 @@ router.get("/trending", auth.isUser, async (req, res) => {
     const trending = await Story.find(
       {},
       { content: 0 },
-      { sort: { totalView: -1 }, limit: 5 }
+      { sort: { totalView: -1, _id: -1 }, limit: 5 }
     );
     return res.json(
       trending.map((story) => {
