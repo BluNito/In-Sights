@@ -32,7 +32,10 @@ app.use("/api/stories", stories);
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
   app.get("*", (req, res) => {
-    res.sendFile(path.join((__dirname, "client/build", "index.html")));
+    console.log("Redirecting to");
+    const respath = path.join((__dirname, "client", "build", "index.html"));
+    console.log(respath);
+    res.sendFile(respath);
   });
 }
 
