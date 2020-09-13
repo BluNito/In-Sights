@@ -31,13 +31,10 @@ app.use("/api/stories", stories);
 //server routes in production
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
-  app.get("*", (req, res) => {
-    console.log("Redirecting to");
-    const respath = path.join((__dirname, "client", "build", "index.html"));
-    console.log(respath);
-    res.sendFile(respath);
-  });
 }
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "client", "build", "index.html"));
+});
 
 const port = process.env.PORT || 5000;
 
