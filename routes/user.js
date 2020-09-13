@@ -13,7 +13,10 @@ const validateLoginInput = require("../validation/login");
 const User = require("../models/Users");
 const isEmpty = require("../validation/is-empty");
 
-// @route   POST api/users/register
+const Story = require("../models/Stories");
+const ViewLog = require("../models/ViewLog");
+
+// @route   POST api/user/register
 // @desc    Register user
 // @access  public
 router.post("/register", async (req, res) => {
@@ -37,6 +40,7 @@ router.post("/register", async (req, res) => {
           username: req.body.username,
           email: req.body.email,
           password: req.body.password,
+          recents: [],
         });
         const Salt = await bcrypt.genSalt(10);
         const cryptedPass = await bcrypt.hash(newUser.password, Salt);
@@ -61,7 +65,7 @@ router.post("/register", async (req, res) => {
   }
 });
 
-// @route   POST api/users/login
+// @route   POST api/user/login
 // @desc    Login user
 // @access  public
 router.post("/login", async (req, res) => {
@@ -99,6 +103,23 @@ router.post("/login", async (req, res) => {
       console.log(e);
       res.status(500).json({ error: "An error has occurred" });
     }
+  }
+});
+
+// @route   GET api/user/delete
+// @desc    DELETES EVERYTHING!!
+// @access  public
+router.get("/deleteall", async (req, res) => {
+  try {
+    // await Promise.all([
+    //   User.deleteMany({}),
+    //   ViewLog.deleteMany({}),
+    //   Story.deleteMany({}),
+    // ]);
+    return res.json({ message: "Great Job." });
+  } catch (e) {
+    console.log(e);
+    res.status(500).json({ error: "An error has occurred" });
   }
 });
 

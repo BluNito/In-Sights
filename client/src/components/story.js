@@ -6,6 +6,7 @@ import Header from "./shared/header";
 import { Floater, FloaterContainer } from "./shared/floaters";
 import CustomCrumbs from "./shared/breadcrumbs";
 import SplashScreen from "./shared/splash";
+import StoryPaper from "./shared/storyPaper";
 
 const Story = (props) => {
   const [loading, setLoading] = useState(true);
@@ -44,7 +45,9 @@ const Story = (props) => {
             <Floater label="Total Views" value={props.totalViews} />
           </FloaterContainer>
           <div className="custom-titles">{props.story.title}</div>
-          <div className="story-mode">{props.story.content}</div>
+          <StoryPaper author={props.story.author}>
+            {props.story.content}
+          </StoryPaper>
         </div>
       )}
     </React.Fragment>

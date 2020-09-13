@@ -23,6 +23,15 @@ const UserSchema = new Schema({
     type: String,
     required: true,
   },
+  recents: {
+    type: [
+      {
+        sid: String,
+        date: Date,
+      },
+    ],
+    required: true,
+  },
 });
 
 module.exports = User = mongoose.model("users", UserSchema);

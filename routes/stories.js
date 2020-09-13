@@ -9,6 +9,7 @@ const validateStoryInput = require("../validation/stories");
 //Load stories models
 const Story = require("../models/Stories");
 const ViewLog = require("../models/ViewLog");
+const Users = require("../models/Users");
 
 // @route   POST api/stories/create
 // @desc    Add stories
@@ -26,6 +27,8 @@ router.post("/create", auth.isUser, async (req, res) => {
         const newStory = new Story({
           title: req.body.title,
           content: req.body.content,
+          author: req.user.id,
+          created: Date.now(),
           totalView: [],
         });
         newStory.save().then((_) => {
@@ -97,12 +100,41 @@ router.get("/trending", auth.isUser, async (req, res) => {
   }
 });
 
+// @route   GET api/stories/recents
+// @desc    Get recently opened stories
+// @access  private
+router.get("/recents", auth.isUser, async (req, res) => {
+  try {
+    const response = await User.findById(req.user.id, { recents: 1, _id: 0 });
+    const recentInfo = await Promise.all(
+      response.recents.map((e) =>
+        Story.findById(e.sid, { title: 1, totalView: 1 }).then((res) => {
+          return {
+            storyId: e.sid,
+            date: e.date,
+            title: res.title,
+            totalView: res.totalView.length,
+          };
+        })
+      )
+    );
+    return res.json(recentInfo);
+  } catch (e) {
+    console.log(e);
+    return res.status(500).json({ error: "An error has occurred" });
+  }
+});
+
 // @route   GET api/stories/story/:storyId
 // @desc    Get a story
 // @access  private
 router.get("/story", auth.isUser, async (req, res) => {
   try {
     const story = await Story.findById(req.query.storyId);
+    const author = await User.findById(story.author, {
+      fname: 1,
+      lname: 1,
+    });
     let offset = 0;
     if (story) {
       Story.updateOne(
@@ -117,16 +149,31 @@ router.get("/story", auth.isUser, async (req, res) => {
           offset = response.nModified;
         }
       );
+      Users.findById(req.user.id, (err, response) => {
+        if (err) throw err;
+        else {
+          response.recents = response.recents.filter(
+            (e) => e.sid != req.query.storyId
+          );
+          response.recents.unshift({
+            sid: req.query.storyId,
+            date: Date.now(),
+          });
+          if (response.recents.length > 5) response.recents.pop();
+          response.save();
+        }
+      });
       return res.json({
         storyId: story._id,
         title: story.title,
         content: story.content,
+        author: author ? `${author.fname} ${author.lname}` : "Anonimous",
         totalView: story.totalView.length + offset,
       });
     } else return res.status(404).json({ error: "Story not found" });
   } catch (e) {
     console.log(e);
-    return res.status(500).json({ error: "An error has occurred" });
+    return res.status(404).json({ error: "Invalid Story ID provided" });
   }
 });
 
@@ -160,7 +207,7 @@ router.get("/viewlog", auth.isUser, async (req, res) => {
     });
   } catch (e) {
     console.log(e);
-    return res.status(500).json({ error: "An error has occurred" });
+    return res.status(404).json({ error: "Document not found" });
   }
 });
 

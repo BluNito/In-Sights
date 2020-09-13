@@ -64,7 +64,7 @@ export const clearTrending = () => {
 
 export const getRecents = () => async (dispatch) => {
   try {
-    const res = await axios.get("/api/stories/trending");
+    const res = await axios.get("/api/stories/recents");
     if (res.status === 203) dispatch(logout());
     dispatch({
       type: SET_RECENTS,

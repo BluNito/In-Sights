@@ -15,6 +15,14 @@ const StorySchema = new Schema({
     type: [String],
     required: true,
   },
+  author: {
+    type: String,
+    required: true,
+  },
+  created: {
+    type: Date,
+    required: true,
+  },
 });
 
 module.exports = Story = mongoose.model("stories", StorySchema);
