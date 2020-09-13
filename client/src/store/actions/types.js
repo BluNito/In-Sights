@@ -1,0 +1,14 @@
+export const SET_USER = "SET_USER";
+export const CLEAR_USER = "CLEAR_USER";
+export const SET_MAIN_LOAD = "SET_MAIN_LOAD";
+export const SET_DIMENSIONS = "SET_DIMENSIONS";
+export const SET_COLLECTION = "SET_COLLECTION";
+export const CLEAR_COLLECTION = "CLEAR_COLLECTION";
+export const SET_STORY = "SET_STORY";
+export const CLEAR_STORY = "CLEAR_STORY";
+export const SET_TRENDING = "SET_TRENDING";
+export const CLEAR_TRENDING = "CLEAR_TRENDING";
+export const SET_RECENTS = "SET_RECENTS";
+export const CLEAR_RECENTS = "CLEAR_RECENTS";
+export const SET_VIEW_COUNT = "SET_VIEW_COUNT";
+export const SET_COLLECTION_PAGE = "SET_COLLECTION_PAGE";

@@ -1,0 +1,45 @@
+.login-page {
+  display: flex;
+  background-image: radial-gradient($accent-color,$main-color);
+  .login-cover {
+    flex-grow: 1;
+  }
+  .login-panel {
+    display: flex;
+    background-color: white;
+    flex-direction: column;
+    align-items: center;
+    padding: 0px 30px;
+    min-height: 100vh;
+    box-shadow: 0px 0px 7px -2px black;
+    padding-bottom: 10px;
+  }
+  .register-panel {
+    display: flex;
+    background-color: white;
+    flex-direction: column;
+    align-items: center;
+    padding: 0px 10px;
+    min-height: 100vh;
+    box-shadow: 0px 0px 7px -2px black;
+    padding-bottom: 10px;
+  }
+  .login-logo {
+    margin-top: 150px;
+    margin-bottom: 10px;
+  }
+  .register-logo {
+    margin-top: 50px;
+    margin-bottom: 10px;
+  }
+  .login-form {
+    max-width: 300px;
+    padding-top: 30px;
+    padding-bottom: 20px;
+  }
+  .register-form {
+    max-width: 500px;
+    padding-top: 30px;
+    padding-bottom: 20px;
+  }
+}

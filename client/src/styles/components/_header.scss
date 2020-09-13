@@ -1,0 +1,30 @@
+.main-header {
+  height: 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: $main-color;
+  box-shadow: 2px 0 4px -3px;
+  margin-bottom: 10px;
+}
+.header-logo {
+  padding: 0px 5px;
+}
+.main-navbar {
+  display: flex;
+  align-items: center;
+  .navbar-item {
+    color: white;
+    padding: 10px;
+    text-transform: uppercase;
+    font-size: $all-cap-size;
+    font-weight: 500;
+    transition: 0.4s;
+  }
+  .navbar-item:hover {
+    background-color: $accent-color;
+  }
+}
+.menu-item {
+  color: black
+}

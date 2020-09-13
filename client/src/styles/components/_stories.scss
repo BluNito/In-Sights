@@ -1,0 +1,23 @@
+.story-tables{
+  .table-title {
+    padding: 15px 10px;
+    font-size: $minititle-size;
+    color: $main-color;
+    border-bottom: 1px solid $shade-color;
+  }
+  margin: 10px;
+  .view-count {
+    display: flex;
+    align-items: center;
+  }
+  .view-count-value {
+    padding: 5px;
+    padding-top: 7px;
+  }
+}
+
+.story-mode {
+  padding: 10px;
+  border: 1px solid $light-accent-color;
+  border-radius: 10px;
+}
