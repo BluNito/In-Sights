@@ -53,7 +53,9 @@ const Landing = (props) => {
       ]);
       setLoading(false);
     };
-    if (dimensions.width < 1170) {
+    if (dimensions.width < 900) {
+      setMiniWidth(12);
+    } else if (dimensions.width < 1170) {
       setMainWidth(12);
       setSubWidth(12);
       setMiniWidth(6);

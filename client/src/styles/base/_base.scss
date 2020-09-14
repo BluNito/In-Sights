@@ -50,3 +50,9 @@ a:hover {
 .main-content {
   margin: 0 30px;
 }
+
+@media (max-width:500px) {
+  .main-content {
+    margin: 0 10px;
+  }
+}

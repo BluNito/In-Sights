@@ -135,20 +135,11 @@ router.get("/story", auth.isUser, async (req, res) => {
       fname: 1,
       lname: 1,
     });
-    let offset = 0;
     if (story) {
-      Story.updateOne(
-        {
-          _id: req.query.storyId,
-          totalView: { $ne: req.user.id },
-        },
-        {
-          $push: { totalView: req.user.id },
-        },
-        (err, response) => {
-          offset = response.nModified;
-        }
-      );
+      if (!story.totalView.includes(req.user.id)) {
+        story.totalView.push(req.user.id);
+        story.save();
+      }
       Users.findById(req.user.id, (err, response) => {
         if (err) throw err;
         else {
@@ -168,7 +159,7 @@ router.get("/story", auth.isUser, async (req, res) => {
         title: story.title,
         content: story.content,
         author: author ? `${author.fname} ${author.lname}` : "Anonimous",
-        totalView: story.totalView.length + offset,
+        totalView: story.totalView.length,
       });
     } else return res.status(404).json({ error: "Story not found" });
   } catch (e) {
